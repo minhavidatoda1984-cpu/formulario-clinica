@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Briefing — Assistente de Atendimento</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #faf7f2;
+    --warm-white: #fffef9;
+    --soft-gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --deep: #1a1612;
+    --dark-brown: #2d2419;
+    --mid: #6b5b45;
+    --light-mid: #a89880;
+    --border: #e8e0d4;
+    --border-focus: #c9a84c;
+    --success: #4a8c6e;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 32px rgba(26,22,18,0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    color: var(--deep);
+    min-height: 100vh;
+  }
+
+  /* Decorative top bar */
+  .top-bar {
+    height: 4px;
+    background: linear-gradient(90deg, #c9a84c, #e8c97a, #c9a84c);
+  }
+
+  .hero {
+    background: var(--dark-brown);
+    padding: 52px 24px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.18) 0%, transparent 70%);
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: rgba(201,168,76,0.15);
+    border: 1px solid rgba(201,168,76,0.3);
+    color: var(--gold-light);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    color: var(--warm-white);
+    font-size: clamp(26px, 5vw, 40px);
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 14px;
+    position: relative;
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--gold-light);
+  }
+
+  .hero p {
+    color: rgba(255,255,255,0.55);
+    font-size: 15px;
+    line-height: 1.65;
+    max-width: 480px;
+    margin: 0 auto;
+    font-weight: 300;
+    position: relative;
+  }
+
+  /* Progress */
+  .progress-wrap {
+    background: var(--dark-brown);
+    padding: 0 24px 28px;
+  }
+
+  .progress-steps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .step-dot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    cursor: default;
+    transition: opacity 0.2s;
+  }
+
+  .step-dot.clickable { cursor: pointer; }
+
+  .dot-circle {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    transition: all 0.3s;
+    border: 2px solid rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.04);
+  }
+
+  .step-dot.done .dot-circle {
+    background: rgba(201,168,76,0.2);
+    border-color: rgba(201,168,76,0.6);
+    color: var(--gold-light);
+  }
+
+  .step-dot.active .dot-circle {
+    background: var(--soft-gold);
+    border-color: var(--soft-gold);
+    color: var(--dark-brown);
+    box-shadow: 0 0 0 4px rgba(201,168,76,0.2);
+  }
+
+  .dot-label {
+    font-size: 10px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    text-transform: uppercase;
+  }
+
+  .step-dot.active .dot-label { color: var(--gold-light); }
+  .step-dot.done .dot-label { color: rgba(201,168,76,0.6); }
+
+  .step-line {
+    flex: 1;
+    height: 2px;
+    background: rgba(255,255,255,0.08);
+    margin-bottom: 22px;
+    transition: background 0.4s;
+    max-width: 60px;
+  }
+  .step-line.done { background: rgba(201,168,76,0.4); }
+
+  /* Content */
+  .container {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 36px 20px 60px;
+  }
+
+  .section-card {
+    background: var(--card-bg);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    padding: 36px 32px;
+    border: 1px solid var(--border);
+    animation: fadeUp 0.35s ease forwards;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(201,168,76,0.15), rgba(201,168,76,0.05));
+    border: 1px solid rgba(201,168,76,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 21px;
+    font-weight: 600;
+    color: var(--deep);
+    line-height: 1.2;
+  }
+
+  .section-header p {
+    font-size: 13px;
+    color: var(--light-mid);
+    margin-top: 3px;
+    line-height: 1.4;
+  }
+
+  /* Fields */
+  .field-group {
+    margin-bottom: 22px;
+  }
+
+  .field-group:last-child { margin-bottom: 0; }
+
+  label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--mid);
+    margin-bottom: 8px;
+    letter-spacing: 0.02em;
+  }
+
+  label .req {
+    color: var(--soft-gold);
+    margin-left: 2px;
+  }
+
+  label .hint {
+    font-weight: 400;
+    color: var(--light-mid);
+    font-size: 12px;
+    display: block;
+    margin-top: 2px;
+  }
+
+  input[type="text"],
+  input[type="tel"],
+  input[type="email"],
+  select,
+  textarea {
+    width: 100%;
+    background: var(--cream);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 14.5px;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--deep);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    -webkit-appearance: none;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--border-focus);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(201,168,76,0.1);
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 96px;
+    line-height: 1.6;
+  }
+
+  select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23a89880' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+  }
+
+  .row-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  @media (max-width: 480px) {
+    .row-2 { grid-template-columns: 1fr; }
+    .section-card { padding: 24px 20px; }
+  }
+
+  /* Radio cards */
+  .radio-group {
+    display: grid;
+    gap: 10px;
+  }
+
+  .radio-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--cream);
+  }
+
+  .radio-card:hover { border-color: rgba(201,168,76,0.4); background: rgba(201,168,76,0.03); }
+
+  .radio-card input[type="radio"] {
+    width: 18px; height: 18px;
+    accent-color: var(--soft-gold);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .radio-card.checked {
+    border-color: var(--soft-gold);
+    background: rgba(201,168,76,0.06);
+  }
+
+  .radio-card span {
+    font-size: 14px;
+    color: var(--deep);
+    font-weight: 400;
+  }
+
+  .radio-card .sub {
+    font-size: 12px;
+    color: var(--light-mid);
+    display: block;
+    margin-top: 1px;
+  }
+
+  /* Checkbox group */
+  .check-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  @media (max-width: 400px) { .check-grid { grid-template-columns: 1fr; } }
+
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--cream);
+    font-size: 13.5px;
+    color: var(--deep);
+  }
+
+  .check-item:hover { border-color: rgba(201,168,76,0.4); }
+  .check-item.checked { border-color: var(--soft-gold); background: rgba(201,168,76,0.06); }
+
+  .check-item input[type="checkbox"] {
+    width: 16px; height: 16px;
+    accent-color: var(--soft-gold);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  /* Navigation */
+  .nav-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .btn-back {
+    padding: 14px 22px;
+    border-radius: 10px;
+    background: transparent;
+    border: 1.5px solid var(--border);
+    color: var(--mid);
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+
+  .btn-back:hover { border-color: var(--light-mid); color: var(--deep); }
+
+  .btn-next {
+    flex: 1;
+    padding: 15px 24px;
+    border-radius: 10px;
+    background: var(--deep);
+    border: none;
+    color: #fff;
+    font-size: 15px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .btn-next:hover:not(:disabled) {
+    background: var(--dark-brown);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(26,22,18,0.2);
+  }
+
+  .btn-next:disabled {
+    background: #e0d8cc;
+    color: #b0a898;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .btn-next.gold {
+    background: linear-gradient(135deg, #c9a84c, #b8962a);
+    box-shadow: 0 4px 16px rgba(201,168,76,0.3);
+  }
+
+  .btn-next.gold:hover:not(:disabled) {
+    background: linear-gradient(135deg, #d4b456, #c9a84c);
+    box-shadow: 0 6px 24px rgba(201,168,76,0.4);
+  }
+
+  /* Step counter */
+  .step-counter {
+    text-align: center;
+    margin-top: 14px;
+    font-size: 12px;
+    color: var(--light-mid);
+    letter-spacing: 0.05em;
+  }
+
+  /* Result screen */
+  .result-screen {
+    display: none;
+  }
+
+  .result-header {
+    text-align: center;
+    padding: 48px 24px 36px;
+    background: var(--dark-brown);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .result-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.2) 0%, transparent 70%);
+  }
+
+  .result-check {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    background: rgba(74,140,110,0.2);
+    border: 2px solid rgba(74,140,110,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 32px;
+    position: relative;
+  }
+
+  .result-header h2 {
+    font-family: 'Playfair Display', serif;
+    color: var(--warm-white);
+    font-size: 26px;
+    margin-bottom: 10px;
+    position: relative;
+  }
+
+  .result-header p {
+    color: rgba(255,255,255,0.5);
+    font-size: 14px;
+    position: relative;
+  }
+
+  .briefing-box {
+    background: #fff;
+    border-radius: 18px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    margin: 32px 20px;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .briefing-header {
+    background: var(--cream);
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .briefing-header span {
+    font-size: 13px;
+    color: var(--mid);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  #briefing-output {
+    padding: 24px;
+    font-size: 13px;
+    line-height: 1.75;
+    color: var(--dark-brown);
+    white-space: pre-wrap;
+    max-height: 480px;
+    overflow-y: auto;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .copy-btn {
+    padding: 8px 18px;
+    border-radius: 8px;
+    background: var(--soft-gold);
+    border: none;
+    color: var(--dark-brown);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+  }
+
+  .copy-btn:hover { background: var(--gold-light); }
+  .copy-btn.copied { background: var(--success); color: #fff; }
+
+  .action-row {
+    display: flex;
+    gap: 12px;
+    padding: 0 20px 40px;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .btn-restart {
+    padding: 14px 22px;
+    border-radius: 10px;
+    background: transparent;
+    border: 1.5px solid var(--border);
+    color: var(--mid);
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+
+  .btn-restart:hover { border-color: var(--mid); }
+
+  .btn-whatsapp {
+    flex: 1;
+    padding: 15px;
+    border-radius: 10px;
+    background: #25d366;
+    border: none;
+    color: #fff;
+    font-size: 15px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-decoration: none;
+  }
+
+  .btn-whatsapp:hover { background: #22c55e; transform: translateY(-1px); }
+
+  /* Divider with label */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 20px 0;
+  }
+
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .divider span {
+    font-size: 11px;
+    color: var(--light-mid);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  /* Character counter */
+  .char-hint {
+    font-size: 11px;
+    color: var(--light-mid);
+    text-align: right;
+    margin-top: 4px;
+  }
+
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<div class="top-bar"></div>
+
+<!-- FORM SCREENS -->
+<div id="form-screen">
+
+  <div class="hero">
+    <div class="hero-badge">Briefing Inicial</div>
+    <h1>Vamos configurar o seu<br><em>Assistente Virtual</em></h1>
+    <p>Preencha as informações abaixo para criarmos um atendente personalizado para a sua clínica.</p>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-steps" id="progress-steps"></div>
+  </div>
+
+  <div class="container">
+    <div class="section-card" id="step-content"></div>
+    <div class="nav-row" id="nav-row"></div>
+    <div class="step-counter" id="step-counter"></div>
+  </div>
+
+</div>
+
+<!-- RESULT SCREEN -->
+<div id="result-screen" class="result-screen">
+  <div class="result-header">
+    <div class="result-check">✓</div>
+    <h2>Briefing concluído!</h2>
+    <p>Suas informações foram registradas com sucesso.</p>
+  </div>
+
+  <div class="briefing-box">
+    <div class="briefing-header">
+      <span>📋 Resumo do briefing</span>
+      <button class="copy-btn" id="copy-btn" onclick="copyBriefing()">Copiar</button>
+    </div>
+    <div id="briefing-output"></div>
+  </div>
+
+  <div class="action-row">
+    <button class="btn-restart" onclick="restart()">← Refazer</button>
+    <a id="whatsapp-link" href="#" class="btn-whatsapp" target="_blank">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Enviar via WhatsApp
+    </a>
+  </div>
+</div>
+
+<script>
+const STEPS = [
+  {
+    id: 'clinica',
+    icon: '🏥',
+    title: 'Sobre a Clínica',
+    subtitle: 'Informações básicas do seu negócio',
+    fields: [
+      { key: 'nome_responsavel', label: 'Seu nome', req: true, type: 'text', placeholder: 'Ex: Dra. Marina Souza' },
+      { key: 'nome_clinica', label: 'Nome da clínica', req: true, type: 'text', placeholder: 'Ex: Clínica Bella Vita' },
+      {
+        key: 'especialidade', label: 'Especialidade principal', req: true, type: 'select',
+        options: ['Odontologia','Estética e Beleza','Dermatologia','Psicologia','Fisioterapia','Nutrição','Ginecologia','Ortopedia','Cardiologia','Clínica Geral','Outra']
+      },
+      { key: 'cidade', label: 'Cidade / Estado', req: true, type: 'text', placeholder: 'Ex: Belo Horizonte - MG' },
+      { key: 'diferenciais', label: 'O que diferencia sua clínica da concorrência?', req: true, type: 'textarea', placeholder: 'Ex: Atendimento humanizado, tecnologia de ponta, equipe especializada, localização central, estacionamento gratuito...' },
+    ]
+  },
+  {
+    id: 'servicos',
+    icon: '💊',
+    title: 'Serviços & Valores',
+    subtitle: 'O que você oferece e como falar sobre preços',
+    fields: [
+      { key: 'servicos', label: 'Liste seus 3 a 5 principais serviços', req: true, type: 'textarea', placeholder: 'Ex:\n• Clareamento dental — R$ 800\n• Implante dental — R$ 3.500\n• Botox facial — R$ 1.200\n• Limpeza de pele — R$ 350' },
+      {
+        key: 'ticket', label: 'Ticket médio dos procedimentos', req: true, type: 'radio',
+        options: [
+          { value: 'ate300', label: 'Até R$ 300', sub: 'Procedimentos rápidos e estéticos' },
+          { value: '300a800', label: 'R$ 300 a R$ 800', sub: 'Procedimentos intermediários' },
+          { value: '800a2000', label: 'R$ 800 a R$ 2.000', sub: 'Tratamentos completos' },
+          { value: 'acima2000', label: 'Acima de R$ 2.000', sub: 'Procedimentos premium' },
+        ]
+      },
+      {
+        key: 'falar_preco', label: 'O assistente pode informar os preços?', req: true, type: 'radio',
+        options: [
+          { value: 'sim', label: 'Sim, pode informar os valores', sub: '' },
+          { value: 'faixa', label: 'Apenas a faixa de preço', sub: 'Ex: "a partir de R$ 500"' },
+          { value: 'nao', label: 'Não, direcionar para avaliação', sub: 'O preço é definido na consulta' },
+        ]
+      },
+      { key: 'promocao', label: 'Tem alguma promoção ou condição especial ativa?', req: false, type: 'textarea', placeholder: 'Ex: 15% de desconto para novos pacientes, parcelamento em até 12x sem juros. (Deixe em branco se não houver)' },
+    ]
+  },
+  {
+    id: 'atendimento',
+    icon: '📅',
+    title: 'Atendimento & Agendamento',
+    subtitle: 'Como funciona o processo para o paciente',
+    fields: [
+      { key: 'horarios', label: 'Horários de funcionamento', req: true, type: 'text', placeholder: 'Ex: Seg–Sex 8h–18h | Sáb 9h–13h' },
+      {
+        key: 'objetivo', label: 'Qual o objetivo principal do assistente?', req: true, type: 'radio',
+        options: [
+          { value: 'consulta_gratis', label: 'Agendar avaliação gratuita', sub: 'Ideal para primeiro contato' },
+          { value: 'consulta_paga', label: 'Agendar consulta paga', sub: '' },
+          { value: 'link', label: 'Enviar para link de agendamento', sub: 'Sistema online próprio' },
+          { value: 'humano', label: 'Transferir para atendente humano', sub: '' },
+        ]
+      },
+      { key: 'link_agendamento', label: 'Link de agendamento (se houver)', req: false, type: 'text', placeholder: 'Ex: https://calendly.com/suaclinica ou link do WhatsApp' },
+      { key: 'como_agendar', label: 'Descreva como o paciente agenda', req: true, type: 'textarea', placeholder: 'Ex: O paciente escolhe o horário pelo link e recebe confirmação automática por WhatsApp. Ou: o paciente informa sua disponibilidade e nossa equipe confirma em até 2h.' },
+    ]
+  },
+  {
+    id: 'objecoes',
+    icon: '🛡️',
+    title: 'Dúvidas & Objeções',
+    subtitle: 'Como o assistente deve responder às resistências mais comuns',
+    fields: [
+      { key: 'obj_preco', label: 'Quando disserem "está caro", o que responder?', req: true, type: 'textarea', placeholder: 'Ex: Destacar o custo-benefício, qualidade dos materiais, resultado duradouro, possibilidade de parcelamento...' },
+      { key: 'obj_tempo', label: 'Quando disserem "não tenho tempo", o que responder?', req: true, type: 'textarea', placeholder: 'Ex: Mencionar horários flexíveis, agilidade dos procedimentos, atendimento em horário de almoço ou sábado...' },
+      { key: 'obj_medo', label: 'Quando sentirem medo ou insegurança, o que responder?', req: true, type: 'textarea', placeholder: 'Ex: Falar sobre a equipe especializada, anestesia, tecnologia utilizada, depoimentos de pacientes satisfeitos...' },
+    ]
+  },
+  {
+    id: 'publico',
+    icon: '👥',
+    title: 'Público & Restrições',
+    subtitle: 'Para quem você atende e o que o assistente não pode fazer',
+    fields: [
+      { key: 'publico', label: 'Descreva seu paciente ideal', req: true, type: 'textarea', placeholder: 'Ex: Mulheres entre 30 e 55 anos, classe B, que valorizam saúde e aparência, moram na região Sul de BH...' },
+      {
+        key: 'origem_lead', label: 'Como esse lead chegou até o assistente?', req: true, type: 'radio',
+        options: [
+          { value: 'disparo', label: 'Recebeu uma mensagem de prospecção', sub: 'Disparo em massa / cold outreach' },
+          { value: 'anuncio', label: 'Veio por anúncio pago', sub: 'Meta Ads / Google Ads' },
+          { value: 'organico', label: 'Veio pelo Instagram / orgânico', sub: '' },
+          { value: 'indicacao', label: 'Foi indicado por alguém', sub: '' },
+        ]
+      },
+      { key: 'nao_fazer', label: 'O que o assistente NUNCA deve fazer ou falar?', req: true, type: 'textarea', placeholder: 'Ex: Nunca prometer resultados garantidos. Nunca dar diagnóstico pelo WhatsApp. Nunca mencionar concorrentes. Nunca falar o nome do médico responsável.' },
+      { key: 'info_extra', label: 'Alguma informação extra importante?', req: false, type: 'textarea', placeholder: 'Ex: Aceitamos convênio XYZ. Temos estacionamento. Trabalhamos com plano de fidelidade. Clínica tem 3 unidades na cidade.' },
+    ]
+  }
+];
+
+let current = 0;
+let data = {};
+
+const stepLabels = ['Clínica','Serviços','Agenda','Objeções','Público'];
+
+function renderProgress() {
+  const wrap = document.getElementById('progress-steps');
+  wrap.innerHTML = '';
+  STEPS.forEach((s, i) => {
+    const dot = document.createElement('div');
+    const cls = i < current ? 'done clickable' : i === current ? 'active' : '';
+    dot.className = `step-dot ${cls}`;
+    if (i < current) dot.onclick = () => goTo(i);
+    dot.innerHTML = `<div class="dot-circle">${i < current ? '✓' : i + 1}</div><div class="dot-label">${stepLabels[i]}</div>`;
+    wrap.appendChild(dot);
+    if (i < STEPS.length - 1) {
+      const line = document.createElement('div');
+      line.className = `step-line${i < current ? ' done' : ''}`;
+      wrap.appendChild(line);
+    }
+  });
+}
+
+function renderStep() {
+  renderProgress();
+  const s = STEPS[current];
+  const content = document.getElementById('step-content');
+
+  let fieldsHTML = '';
+  s.fields.forEach(f => {
+    fieldsHTML += `<div class="field-group" id="fg-${f.key}">`;
+    fieldsHTML += `<label for="${f.key}">${f.label}${f.req ? '<span class="req">*</span>' : ''}</label>`;
+
+    if (f.type === 'text') {
+      fieldsHTML += `<input type="text" id="${f.key}" placeholder="${f.placeholder}" value="${escape(data[f.key] || '')}" oninput="save('${f.key}',this.value)">`;
+    } else if (f.type === 'textarea') {
+      fieldsHTML += `<textarea id="${f.key}" placeholder="${f.placeholder}" oninput="save('${f.key}',this.value)">${escape(data[f.key] || '')}</textarea>`;
+    } else if (f.type === 'select') {
+      let opts = `<option value="">Selecione...</option>`;
+      f.options.forEach(o => { opts += `<option value="${o}" ${data[f.key] === o ? 'selected' : ''}>${o}</option>`; });
+      fieldsHTML += `<select id="${f.key}" onchange="save('${f.key}',this.value)">${opts}</select>`;
+    } else if (f.type === 'radio') {
+      fieldsHTML += `<div class="radio-group">`;
+      f.options.forEach(o => {
+        const checked = data[f.key] === o.value;
+        fieldsHTML += `
+          <label class="radio-card${checked ? ' checked' : ''}" id="rc-${f.key}-${o.value}" onclick="selectRadio('${f.key}','${o.value}')">
+            <input type="radio" name="${f.key}" value="${o.value}" ${checked ? 'checked' : ''}>
+            <div>
+              <span>${o.label}</span>
+              ${o.sub ? `<span class="sub">${o.sub}</span>` : ''}
+            </div>
+          </label>`;
+      });
+      fieldsHTML += `</div>`;
+    }
+    fieldsHTML += `</div>`;
+  });
+
+  content.innerHTML = `
+    <div class="section-header">
+      <div class="section-icon">${s.icon}</div>
+      <div>
+        <h2>${s.title}</h2>
+        <p>${s.subtitle}</p>
+      </div>
+    </div>
+    ${fieldsHTML}
+  `;
+
+  const nav = document.getElementById('nav-row');
+  const isLast = current === STEPS.length - 1;
+  nav.innerHTML = `
+    ${current > 0 ? `<button class="btn-back" onclick="prev()">← Voltar</button>` : ''}
+    <button class="btn-next ${isLast ? 'gold' : ''}" id="btn-next" onclick="next()">
+      ${isLast ? '✨ Gerar Briefing' : 'Continuar →'}
+    </button>
+  `;
+
+  document.getElementById('step-counter').textContent = `Etapa ${current + 1} de ${STEPS.length}`;
+  updateNext();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function escape(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function save(key, value) {
+  data[key] = value;
+  updateNext();
+}
+
+function selectRadio(key, value) {
+  data[key] = value;
+  // Update all radio cards for this field
+  document.querySelectorAll(`[id^="rc-${key}-"]`).forEach(el => {
+    el.classList.remove('checked');
+    el.querySelector('input').checked = false;
+  });
+  const selected = document.getElementById(`rc-${key}-${value}`);
+  if (selected) {
+    selected.classList.add('checked');
+    selected.querySelector('input').checked = true;
+  }
+  updateNext();
+}
+
+function isStepComplete() {
+  return STEPS[current].fields.filter(f => f.req).every(f => {
+    const v = data[f.key];
+    return v && v.toString().trim() !== '';
+  });
+}
+
+function updateNext() {
+  const btn = document.getElementById('btn-next');
+  if (btn) btn.disabled = !isStepComplete();
+}
+
+function next() {
+  if (!isStepComplete()) return;
+  if (current < STEPS.length - 1) { current++; renderStep(); }
+  else showResult();
+}
+
+function prev() { if (current > 0) { current--; renderStep(); } }
+function goTo(i) { current = i; renderStep(); }
+
+async function showResult() {
+  // Show loading on button
+  const btn = document.getElementById('btn-next');
+  if (btn) { btn.disabled = true; btn.textContent = 'Enviando...'; }
+
+  // Send to n8n webhook → Google Sheets
+  const WEBHOOK_URL = 'https://n8n.naturaisterravida.com.br/webhook/briefing-clinica';
+  try {
+    await fetch(WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ body: data })
+    });
+  } catch(e) {
+    console.warn('Webhook error (non-critical):', e);
+  }
+
+  document.getElementById('form-screen').style.display = 'none';
+  const rs = document.getElementById('result-screen');
+  rs.style.display = 'block';
+
+  const briefing = buildBriefing();
+  document.getElementById('briefing-output').textContent = briefing;
+
+  const msg = encodeURIComponent('Olá! Segue o briefing preenchido para o assistente virtual da clínica:\n\n' + briefing);
+  document.getElementById('whatsapp-link').href = `https://wa.me/?text=${msg}`;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function buildBriefing() {
+  const d = data;
+  const ticket_labels = { 'ate300':'Até R$ 300', '300a800':'R$ 300 a R$ 800', '800a2000':'R$ 800 a R$ 2.000', 'acima2000':'Acima de R$ 2.000' };
+  const preco_labels = { 'sim':'Pode informar valores', 'faixa':'Apenas faixa de preço', 'nao':'Direcionar para avaliação' };
+  const objetivo_labels = { 'consulta_gratis':'Agendar avaliação gratuita', 'consulta_paga':'Agendar consulta paga', 'link':'Enviar para link de agendamento', 'humano':'Transferir para atendente humano' };
+  const origem_labels = { 'disparo':'Disparo em massa (prospecção)', 'anuncio':'Anúncio pago', 'organico':'Instagram / orgânico', 'indicacao':'Indicação' };
+
+  return `════════════════════════════════════
+BRIEFING — ASSISTENTE VIRTUAL
+════════════════════════════════════
+
+📋 RESPONSÁVEL
+Nome: ${d.nome_responsavel || '—'}
+
+🏥 A CLÍNICA
+Nome: ${d.nome_clinica || '—'}
+Especialidade: ${d.especialidade || '—'}
+Localização: ${d.cidade || '—'}
+Diferenciais: ${d.diferenciais || '—'}
+
+────────────────────────────────────
+💊 SERVIÇOS & VALORES
+────────────────────────────────────
+${d.servicos || '—'}
+
+Ticket médio: ${ticket_labels[d.ticket] || '—'}
+Falar preços: ${preco_labels[d.falar_preco] || '—'}
+${d.promocao ? `Promoção ativa: ${d.promocao}` : 'Sem promoção ativa'}
+
+────────────────────────────────────
+📅 ATENDIMENTO & AGENDAMENTO
+────────────────────────────────────
+Horários: ${d.horarios || '—'}
+Objetivo do assistente: ${objetivo_labels[d.objetivo] || '—'}
+${d.link_agendamento ? `Link de agendamento: ${d.link_agendamento}` : 'Sem link de agendamento'}
+Processo: ${d.como_agendar || '—'}
+
+────────────────────────────────────
+🛡️ OBJEÇÕES
+────────────────────────────────────
+"Está caro":
+${d.obj_preco || '—'}
+
+"Não tenho tempo":
+${d.obj_tempo || '—'}
+
+"Tenho medo / insegurança":
+${d.obj_medo || '—'}
+
+────────────────────────────────────
+👥 PÚBLICO & RESTRIÇÕES
+────────────────────────────────────
+Paciente ideal: ${d.publico || '—'}
+Origem do lead: ${origem_labels[d.origem_lead] || '—'}
+O que NÃO fazer: ${d.nao_fazer || '—'}
+${d.info_extra ? `Informações extras: ${d.info_extra}` : ''}
+
+════════════════════════════════════`;
+}
+
+function copyBriefing() {
+  const text = document.getElementById('briefing-output').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copy-btn');
+    btn.textContent = '✓ Copiado!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copiar'; btn.classList.remove('copied'); }, 2500);
+  });
+}
+
+function restart() {
+  current = 0;
+  data = {};
+  document.getElementById('result-screen').style.display = 'none';
+  document.getElementById('form-screen').style.display = 'block';
+  renderStep();
+}
+
+// Init
+renderStep();
+</script>
+</body>
+</html>
