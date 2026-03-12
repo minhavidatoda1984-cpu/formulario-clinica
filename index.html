@@ -31,7 +31,6 @@
     min-height: 100vh;
   }
 
-  /* Decorative top bar */
   .top-bar {
     height: 4px;
     background: linear-gradient(90deg, #c9a84c, #e8c97a, #c9a84c);
@@ -91,7 +90,6 @@
     position: relative;
   }
 
-  /* Progress */
   .progress-wrap {
     background: var(--dark-brown);
     padding: 0 24px 28px;
@@ -102,7 +100,7 @@
     align-items: center;
     justify-content: center;
     gap: 0;
-    max-width: 560px;
+    max-width: 640px;
     margin: 0 auto;
   }
 
@@ -118,13 +116,13 @@
   .step-dot.clickable { cursor: pointer; }
 
   .dot-circle {
-    width: 34px;
-    height: 34px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
     transition: all 0.3s;
     border: 2px solid rgba(255,255,255,0.1);
@@ -146,7 +144,7 @@
   }
 
   .dot-label {
-    font-size: 10px;
+    font-size: 9px;
     color: rgba(255,255,255,0.3);
     letter-spacing: 0.05em;
     white-space: nowrap;
@@ -162,11 +160,10 @@
     background: rgba(255,255,255,0.08);
     margin-bottom: 22px;
     transition: background 0.4s;
-    max-width: 60px;
+    max-width: 40px;
   }
   .step-line.done { background: rgba(201,168,76,0.4); }
 
-  /* Content */
   .container {
     max-width: 640px;
     margin: 0 auto;
@@ -224,11 +221,7 @@
     line-height: 1.4;
   }
 
-  /* Fields */
-  .field-group {
-    margin-bottom: 22px;
-  }
-
+  .field-group { margin-bottom: 22px; }
   .field-group:last-child { margin-bottom: 0; }
 
   label {
@@ -240,18 +233,7 @@
     letter-spacing: 0.02em;
   }
 
-  label .req {
-    color: var(--soft-gold);
-    margin-left: 2px;
-  }
-
-  label .hint {
-    font-weight: 400;
-    color: var(--light-mid);
-    font-size: 12px;
-    display: block;
-    margin-top: 2px;
-  }
+  label .req { color: var(--soft-gold); margin-left: 2px; }
 
   input[type="text"],
   input[type="tel"],
@@ -302,11 +284,7 @@
     .section-card { padding: 24px 20px; }
   }
 
-  /* Radio cards */
-  .radio-group {
-    display: grid;
-    gap: 10px;
-  }
+  .radio-group { display: grid; gap: 10px; }
 
   .radio-card {
     display: flex;
@@ -334,53 +312,9 @@
     background: rgba(201,168,76,0.06);
   }
 
-  .radio-card span {
-    font-size: 14px;
-    color: var(--deep);
-    font-weight: 400;
-  }
+  .radio-card span { font-size: 14px; color: var(--deep); font-weight: 400; }
+  .radio-card .sub { font-size: 12px; color: var(--light-mid); display: block; margin-top: 1px; }
 
-  .radio-card .sub {
-    font-size: 12px;
-    color: var(--light-mid);
-    display: block;
-    margin-top: 1px;
-  }
-
-  /* Checkbox group */
-  .check-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-  }
-
-  @media (max-width: 400px) { .check-grid { grid-template-columns: 1fr; } }
-
-  .check-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 14px;
-    border: 1.5px solid var(--border);
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s;
-    background: var(--cream);
-    font-size: 13.5px;
-    color: var(--deep);
-  }
-
-  .check-item:hover { border-color: rgba(201,168,76,0.4); }
-  .check-item.checked { border-color: var(--soft-gold); background: rgba(201,168,76,0.06); }
-
-  .check-item input[type="checkbox"] {
-    width: 16px; height: 16px;
-    accent-color: var(--soft-gold);
-    cursor: pointer;
-    flex-shrink: 0;
-  }
-
-  /* Navigation */
   .nav-row {
     display: flex;
     gap: 12px;
@@ -445,7 +379,6 @@
     box-shadow: 0 6px 24px rgba(201,168,76,0.4);
   }
 
-  /* Step counter */
   .step-counter {
     text-align: center;
     margin-top: 14px;
@@ -455,9 +388,7 @@
   }
 
   /* Result screen */
-  .result-screen {
-    display: none;
-  }
+  .result-screen { display: none; }
 
   .result-header {
     text-align: center;
@@ -501,13 +432,83 @@
     position: relative;
   }
 
+  /* Edit link box */
+  .edit-link-box {
+    background: rgba(201,168,76,0.1);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin: 24px 20px 0;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+  }
+
+  .edit-link-box h3 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--soft-gold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .edit-link-box p {
+    font-size: 13px;
+    color: var(--mid);
+    margin-bottom: 12px;
+    line-height: 1.5;
+  }
+
+  .edit-link-input-wrap {
+    display: flex;
+    gap: 8px;
+  }
+
+  .edit-link-input {
+    flex: 1;
+    background: #fff;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 12px;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--mid);
+    outline: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .copy-link-btn {
+    padding: 10px 16px;
+    border-radius: 8px;
+    background: var(--soft-gold);
+    border: none;
+    color: var(--dark-brown);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .copy-link-btn:hover { background: var(--gold-light); }
+  .copy-link-btn.copied { background: var(--success); color: #fff; }
+
   .briefing-box {
     background: #fff;
     border-radius: 18px;
     border: 1px solid var(--border);
     box-shadow: var(--shadow);
     overflow: hidden;
-    margin: 32px 20px;
+    margin: 20px 20px 0;
     max-width: 640px;
     margin-left: auto;
     margin-right: auto;
@@ -536,7 +537,7 @@
     line-height: 1.75;
     color: var(--dark-brown);
     white-space: pre-wrap;
-    max-height: 480px;
+    max-height: 400px;
     overflow-y: auto;
     font-family: 'DM Sans', sans-serif;
   }
@@ -560,7 +561,7 @@
   .action-row {
     display: flex;
     gap: 12px;
-    padding: 0 20px 40px;
+    padding: 20px 20px 40px;
     max-width: 640px;
     margin: 0 auto;
   }
@@ -601,35 +602,58 @@
 
   .btn-whatsapp:hover { background: #22c55e; transform: translateY(-1px); }
 
-  /* Divider with label */
-  .divider {
+  /* Edit mode banner */
+  .edit-banner {
+    background: linear-gradient(135deg, rgba(201,168,76,0.15), rgba(201,168,76,0.05));
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-bottom: 20px;
     display: flex;
     align-items: center;
     gap: 12px;
-    margin: 20px 0;
+    font-size: 13px;
+    color: var(--mid);
   }
 
-  .divider::before, .divider::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
+  .edit-banner strong { color: var(--soft-gold); }
+
+  /* Loading overlay */
+  .loading-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(250,247,242,0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
   }
 
-  .divider span {
-    font-size: 11px;
-    color: var(--light-mid);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    white-space: nowrap;
+  .loading-overlay.show {
+    opacity: 1;
+    pointer-events: all;
   }
 
-  /* Character counter */
-  .char-hint {
-    font-size: 11px;
-    color: var(--light-mid);
-    text-align: right;
-    margin-top: 4px;
+  .loading-spinner {
+    width: 48px;
+    height: 48px;
+    border: 3px solid var(--border);
+    border-top-color: var(--soft-gold);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-bottom: 16px;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .loading-text {
+    font-size: 14px;
+    color: var(--mid);
+    font-weight: 500;
   }
 
   .hidden { display: none !important; }
@@ -637,13 +661,16 @@
 </head>
 <body>
 
+<div class="loading-overlay" id="loading-overlay">
+  <div class="loading-spinner"></div>
+  <div class="loading-text" id="loading-text">Enviando...</div>
+</div>
+
 <div class="top-bar"></div>
 
-<!-- FORM SCREENS -->
 <div id="form-screen">
-
   <div class="hero">
-    <div class="hero-badge">Briefing Inicial</div>
+    <div class="hero-badge" id="hero-badge">Briefing Inicial</div>
     <h1>Vamos configurar o seu<br><em>Assistente Virtual</em></h1>
     <p>Preencha as informações abaixo para criarmos um atendente personalizado para a sua clínica.</p>
   </div>
@@ -653,19 +680,27 @@
   </div>
 
   <div class="container">
+    <div id="edit-banner-wrap"></div>
     <div class="section-card" id="step-content"></div>
     <div class="nav-row" id="nav-row"></div>
     <div class="step-counter" id="step-counter"></div>
   </div>
-
 </div>
 
-<!-- RESULT SCREEN -->
 <div id="result-screen" class="result-screen">
   <div class="result-header">
     <div class="result-check">✓</div>
-    <h2>Briefing concluído!</h2>
-    <p>Suas informações foram registradas com sucesso.</p>
+    <h2 id="result-title">Briefing concluído!</h2>
+    <p id="result-subtitle">Suas informações foram registradas com sucesso.</p>
+  </div>
+
+  <div class="edit-link-box" id="edit-link-box">
+    <h3>🔗 Link de edição</h3>
+    <p>Guarde este link para editar suas respostas a qualquer momento:</p>
+    <div class="edit-link-input-wrap">
+      <input type="text" class="edit-link-input" id="edit-link-display" readonly>
+      <button class="copy-link-btn" id="copy-link-btn" onclick="copyEditLink()">Copiar</button>
+    </div>
   </div>
 
   <div class="briefing-box">
@@ -677,7 +712,7 @@
   </div>
 
   <div class="action-row">
-    <button class="btn-restart" onclick="restart()">← Refazer</button>
+    <button class="btn-restart" onclick="restart()">← Novo</button>
     <a id="whatsapp-link" href="#" class="btn-whatsapp" target="_blank">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
       Enviar via WhatsApp
@@ -686,21 +721,34 @@
 </div>
 
 <script>
+const WEBHOOK_URL = 'https://n8n.naturaisterravida.com.br/webhook/briefing-clinica';
+
 const STEPS = [
+  {
+    id: 'lead',
+    icon: '👤',
+    title: 'Seus Dados',
+    subtitle: 'Informações de contato do responsável',
+    fields: [
+      { key: 'nome_responsavel', label: 'Seu nome completo', req: true, type: 'text', placeholder: 'Ex: Dra. Marina Souza' },
+      { key: 'whatsapp', label: 'WhatsApp', req: true, type: 'tel', placeholder: 'Ex: (31) 99999-0000' },
+      { key: 'email', label: 'E-mail', req: false, type: 'email', placeholder: 'Ex: contato@clinica.com.br' },
+      { key: 'cargo', label: 'Cargo / função', req: false, type: 'text', placeholder: 'Ex: Proprietária, Gerente, Médica...' },
+    ]
+  },
   {
     id: 'clinica',
     icon: '🏥',
     title: 'Sobre a Clínica',
     subtitle: 'Informações básicas do seu negócio',
     fields: [
-      { key: 'nome_responsavel', label: 'Seu nome', req: true, type: 'text', placeholder: 'Ex: Dra. Marina Souza' },
       { key: 'nome_clinica', label: 'Nome da clínica', req: true, type: 'text', placeholder: 'Ex: Clínica Bella Vita' },
       {
         key: 'especialidade', label: 'Especialidade principal', req: true, type: 'select',
         options: ['Odontologia','Estética e Beleza','Dermatologia','Psicologia','Fisioterapia','Nutrição','Ginecologia','Ortopedia','Cardiologia','Clínica Geral','Outra']
       },
       { key: 'cidade', label: 'Cidade / Estado', req: true, type: 'text', placeholder: 'Ex: Belo Horizonte - MG' },
-      { key: 'diferenciais', label: 'O que diferencia sua clínica da concorrência?', req: true, type: 'textarea', placeholder: 'Ex: Atendimento humanizado, tecnologia de ponta, equipe especializada, localização central, estacionamento gratuito...' },
+      { key: 'diferenciais', label: 'O que diferencia sua clínica da concorrência?', req: true, type: 'textarea', placeholder: 'Ex: Atendimento humanizado, tecnologia de ponta, equipe especializada...' },
     ]
   },
   {
@@ -709,25 +757,25 @@ const STEPS = [
     title: 'Serviços & Valores',
     subtitle: 'O que você oferece e como falar sobre preços',
     fields: [
-      { key: 'servicos', label: 'Liste seus 3 a 5 principais serviços', req: true, type: 'textarea', placeholder: 'Ex:\n• Clareamento dental — R$ 800\n• Implante dental — R$ 3.500\n• Botox facial — R$ 1.200\n• Limpeza de pele — R$ 350' },
+      { key: 'servicos', label: 'Liste seus 3 a 5 principais serviços', req: true, type: 'textarea', placeholder: 'Ex:\n• Clareamento dental — R$ 800\n• Implante dental — R$ 3.500\n• Botox facial — R$ 1.200' },
       {
         key: 'ticket', label: 'Ticket médio dos procedimentos', req: true, type: 'radio',
         options: [
-          { value: 'ate300', label: 'Até R$ 300', sub: 'Procedimentos rápidos e estéticos' },
-          { value: '300a800', label: 'R$ 300 a R$ 800', sub: 'Procedimentos intermediários' },
-          { value: '800a2000', label: 'R$ 800 a R$ 2.000', sub: 'Tratamentos completos' },
-          { value: 'acima2000', label: 'Acima de R$ 2.000', sub: 'Procedimentos premium' },
+          { value: 'ate300', label: 'Até R$ 300', sub: '' },
+          { value: '300a800', label: 'R$ 300 a R$ 800', sub: '' },
+          { value: '800a2000', label: 'R$ 800 a R$ 2.000', sub: '' },
+          { value: 'acima2000', label: 'Acima de R$ 2.000', sub: '' },
         ]
       },
       {
         key: 'falar_preco', label: 'O assistente pode informar os preços?', req: true, type: 'radio',
         options: [
           { value: 'sim', label: 'Sim, pode informar os valores', sub: '' },
-          { value: 'faixa', label: 'Apenas a faixa de preço', sub: 'Ex: "a partir de R$ 500"' },
-          { value: 'nao', label: 'Não, direcionar para avaliação', sub: 'O preço é definido na consulta' },
+          { value: 'faixa', label: 'Apenas a faixa de preço', sub: '' },
+          { value: 'nao', label: 'Não, direcionar para avaliação', sub: '' },
         ]
       },
-      { key: 'promocao', label: 'Tem alguma promoção ou condição especial ativa?', req: false, type: 'textarea', placeholder: 'Ex: 15% de desconto para novos pacientes, parcelamento em até 12x sem juros. (Deixe em branco se não houver)' },
+      { key: 'promocao', label: 'Promoção ou condição especial ativa?', req: false, type: 'textarea', placeholder: 'Deixe em branco se não houver.' },
     ]
   },
   {
@@ -738,27 +786,27 @@ const STEPS = [
     fields: [
       { key: 'horarios', label: 'Horários de funcionamento', req: true, type: 'text', placeholder: 'Ex: Seg–Sex 8h–18h | Sáb 9h–13h' },
       {
-        key: 'objetivo', label: 'Qual o objetivo principal do assistente?', req: true, type: 'radio',
+        key: 'objetivo', label: 'Objetivo principal do assistente', req: true, type: 'radio',
         options: [
-          { value: 'consulta_gratis', label: 'Agendar avaliação gratuita', sub: 'Ideal para primeiro contato' },
+          { value: 'consulta_gratis', label: 'Agendar avaliação gratuita', sub: '' },
           { value: 'consulta_paga', label: 'Agendar consulta paga', sub: '' },
-          { value: 'link', label: 'Enviar para link de agendamento', sub: 'Sistema online próprio' },
+          { value: 'link', label: 'Enviar para link de agendamento', sub: '' },
           { value: 'humano', label: 'Transferir para atendente humano', sub: '' },
         ]
       },
-      { key: 'link_agendamento', label: 'Link de agendamento (se houver)', req: false, type: 'text', placeholder: 'Ex: https://calendly.com/suaclinica ou link do WhatsApp' },
-      { key: 'como_agendar', label: 'Descreva como o paciente agenda', req: true, type: 'textarea', placeholder: 'Ex: O paciente escolhe o horário pelo link e recebe confirmação automática por WhatsApp. Ou: o paciente informa sua disponibilidade e nossa equipe confirma em até 2h.' },
+      { key: 'link_agendamento', label: 'Link de agendamento (se houver)', req: false, type: 'text', placeholder: 'Ex: https://calendly.com/suaclinica' },
+      { key: 'como_agendar', label: 'Descreva como o paciente agenda', req: true, type: 'textarea', placeholder: 'Ex: O paciente escolhe o horário pelo link e recebe confirmação por WhatsApp.' },
     ]
   },
   {
     id: 'objecoes',
     icon: '🛡️',
     title: 'Dúvidas & Objeções',
-    subtitle: 'Como o assistente deve responder às resistências mais comuns',
+    subtitle: 'Como responder às resistências mais comuns',
     fields: [
-      { key: 'obj_preco', label: 'Quando disserem "está caro", o que responder?', req: true, type: 'textarea', placeholder: 'Ex: Destacar o custo-benefício, qualidade dos materiais, resultado duradouro, possibilidade de parcelamento...' },
-      { key: 'obj_tempo', label: 'Quando disserem "não tenho tempo", o que responder?', req: true, type: 'textarea', placeholder: 'Ex: Mencionar horários flexíveis, agilidade dos procedimentos, atendimento em horário de almoço ou sábado...' },
-      { key: 'obj_medo', label: 'Quando sentirem medo ou insegurança, o que responder?', req: true, type: 'textarea', placeholder: 'Ex: Falar sobre a equipe especializada, anestesia, tecnologia utilizada, depoimentos de pacientes satisfeitos...' },
+      { key: 'obj_preco', label: 'Quando disserem "está caro", o que responder?', req: true, type: 'textarea', placeholder: 'Ex: Destacar custo-benefício, parcelamento, qualidade...' },
+      { key: 'obj_tempo', label: 'Quando disserem "não tenho tempo", o que responder?', req: true, type: 'textarea', placeholder: 'Ex: Mencionar horários flexíveis, agilidade dos procedimentos...' },
+      { key: 'obj_medo', label: 'Quando sentirem medo/insegurança, o que responder?', req: true, type: 'textarea', placeholder: 'Ex: Equipe especializada, anestesia, tecnologia, depoimentos...' },
     ]
   },
   {
@@ -767,26 +815,64 @@ const STEPS = [
     title: 'Público & Restrições',
     subtitle: 'Para quem você atende e o que o assistente não pode fazer',
     fields: [
-      { key: 'publico', label: 'Descreva seu paciente ideal', req: true, type: 'textarea', placeholder: 'Ex: Mulheres entre 30 e 55 anos, classe B, que valorizam saúde e aparência, moram na região Sul de BH...' },
+      { key: 'publico', label: 'Descreva seu paciente ideal', req: true, type: 'textarea', placeholder: 'Ex: Mulheres entre 30–55 anos, classe B, que valorizam saúde e aparência...' },
       {
         key: 'origem_lead', label: 'Como esse lead chegou até o assistente?', req: true, type: 'radio',
         options: [
-          { value: 'disparo', label: 'Recebeu uma mensagem de prospecção', sub: 'Disparo em massa / cold outreach' },
-          { value: 'anuncio', label: 'Veio por anúncio pago', sub: 'Meta Ads / Google Ads' },
-          { value: 'organico', label: 'Veio pelo Instagram / orgânico', sub: '' },
+          { value: 'disparo', label: 'Recebeu mensagem de prospecção', sub: '' },
+          { value: 'anuncio', label: 'Veio por anúncio pago', sub: '' },
+          { value: 'organico', label: 'Instagram / orgânico', sub: '' },
           { value: 'indicacao', label: 'Foi indicado por alguém', sub: '' },
         ]
       },
-      { key: 'nao_fazer', label: 'O que o assistente NUNCA deve fazer ou falar?', req: true, type: 'textarea', placeholder: 'Ex: Nunca prometer resultados garantidos. Nunca dar diagnóstico pelo WhatsApp. Nunca mencionar concorrentes. Nunca falar o nome do médico responsável.' },
-      { key: 'info_extra', label: 'Alguma informação extra importante?', req: false, type: 'textarea', placeholder: 'Ex: Aceitamos convênio XYZ. Temos estacionamento. Trabalhamos com plano de fidelidade. Clínica tem 3 unidades na cidade.' },
+      { key: 'nao_fazer', label: 'O que o assistente NUNCA deve fazer?', req: true, type: 'textarea', placeholder: 'Ex: Nunca prometer resultados garantidos. Nunca dar diagnóstico pelo WhatsApp.' },
+      { key: 'info_extra', label: 'Alguma informação extra importante?', req: false, type: 'textarea', placeholder: 'Ex: Aceitamos convênio XYZ. Temos estacionamento. Trabalhamos com fidelidade.' },
     ]
   }
 ];
 
+const stepLabels = ['Dados','Clínica','Serviços','Agenda','Objeções','Público'];
+
 let current = 0;
 let data = {};
+let editToken = null;
+let isEditMode = false;
 
-const stepLabels = ['Clínica','Serviços','Agenda','Objeções','Público'];
+// Check URL for edit token
+function checkEditMode() {
+  const params = new URLSearchParams(window.location.search);
+  const token = params.get('edit');
+  if (token) {
+    editToken = token;
+    isEditMode = true;
+    document.getElementById('hero-badge').textContent = 'Editar Briefing';
+    loadExistingData(token);
+  }
+}
+
+async function loadExistingData(token) {
+  showLoading('Carregando seus dados...');
+  try {
+    const res = await fetch(`${WEBHOOK_URL}?action=get&token=${token}`);
+    const result = await res.json();
+    if (result.data) {
+      data = result.data;
+    }
+  } catch(e) {
+    console.warn('Could not load existing data:', e);
+  }
+  hideLoading();
+  renderStep();
+}
+
+function showLoading(text) {
+  document.getElementById('loading-text').textContent = text || 'Carregando...';
+  document.getElementById('loading-overlay').classList.add('show');
+}
+
+function hideLoading() {
+  document.getElementById('loading-overlay').classList.remove('show');
+}
 
 function renderProgress() {
   const wrap = document.getElementById('progress-steps');
@@ -809,25 +895,34 @@ function renderProgress() {
 function renderStep() {
   renderProgress();
   const s = STEPS[current];
-  const content = document.getElementById('step-content');
 
+  // Edit mode banner
+  const bannerWrap = document.getElementById('edit-banner-wrap');
+  if (isEditMode) {
+    bannerWrap.innerHTML = `<div class="edit-banner">✏️ <div><strong>Modo de edição</strong> — suas alterações serão salvas ao concluir</div></div>`;
+  }
+
+  const content = document.getElementById('step-content');
   let fieldsHTML = '';
+
   s.fields.forEach(f => {
     fieldsHTML += `<div class="field-group" id="fg-${f.key}">`;
     fieldsHTML += `<label for="${f.key}">${f.label}${f.req ? '<span class="req">*</span>' : ''}</label>`;
 
-    if (f.type === 'text') {
-      fieldsHTML += `<input type="text" id="${f.key}" placeholder="${f.placeholder}" value="${escape(data[f.key] || '')}" oninput="save('${f.key}',this.value)">`;
+    const val = data[f.key] || '';
+
+    if (f.type === 'text' || f.type === 'tel' || f.type === 'email') {
+      fieldsHTML += `<input type="${f.type}" id="${f.key}" placeholder="${f.placeholder}" value="${esc(val)}" oninput="save('${f.key}',this.value)">`;
     } else if (f.type === 'textarea') {
-      fieldsHTML += `<textarea id="${f.key}" placeholder="${f.placeholder}" oninput="save('${f.key}',this.value)">${escape(data[f.key] || '')}</textarea>`;
+      fieldsHTML += `<textarea id="${f.key}" placeholder="${f.placeholder}" oninput="save('${f.key}',this.value)">${esc(val)}</textarea>`;
     } else if (f.type === 'select') {
       let opts = `<option value="">Selecione...</option>`;
-      f.options.forEach(o => { opts += `<option value="${o}" ${data[f.key] === o ? 'selected' : ''}>${o}</option>`; });
+      f.options.forEach(o => { opts += `<option value="${o}" ${val === o ? 'selected' : ''}>${o}</option>`; });
       fieldsHTML += `<select id="${f.key}" onchange="save('${f.key}',this.value)">${opts}</select>`;
     } else if (f.type === 'radio') {
       fieldsHTML += `<div class="radio-group">`;
       f.options.forEach(o => {
-        const checked = data[f.key] === o.value;
+        const checked = val === o.value;
         fieldsHTML += `
           <label class="radio-card${checked ? ' checked' : ''}" id="rc-${f.key}-${o.value}" onclick="selectRadio('${f.key}','${o.value}')">
             <input type="radio" name="${f.key}" value="${o.value}" ${checked ? 'checked' : ''}>
@@ -858,7 +953,7 @@ function renderStep() {
   nav.innerHTML = `
     ${current > 0 ? `<button class="btn-back" onclick="prev()">← Voltar</button>` : ''}
     <button class="btn-next ${isLast ? 'gold' : ''}" id="btn-next" onclick="next()">
-      ${isLast ? '✨ Gerar Briefing' : 'Continuar →'}
+      ${isLast ? (isEditMode ? '✨ Salvar Alterações' : '✨ Gerar Briefing') : 'Continuar →'}
     </button>
   `;
 
@@ -867,8 +962,8 @@ function renderStep() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function escape(str) {
-  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+function esc(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
 function save(key, value) {
@@ -878,7 +973,6 @@ function save(key, value) {
 
 function selectRadio(key, value) {
   data[key] = value;
-  // Update all radio cards for this field
   document.querySelectorAll(`[id^="rc-${key}-"]`).forEach(el => {
     el.classList.remove('checked');
     el.querySelector('input').checked = false;
@@ -913,30 +1007,42 @@ function prev() { if (current > 0) { current--; renderStep(); } }
 function goTo(i) { current = i; renderStep(); }
 
 async function showResult() {
-  // Show loading on button
-  const btn = document.getElementById('btn-next');
-  if (btn) { btn.disabled = true; btn.textContent = 'Enviando...'; }
+  showLoading(isEditMode ? 'Salvando alterações...' : 'Enviando briefing...');
 
-  // Send to n8n webhook → Google Sheets
-  const WEBHOOK_URL = 'https://n8n.naturaisterravida.com.br/webhook/briefing-clinica';
+  // Generate token if new submission
+  if (!editToken) {
+    editToken = 'edit_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+  }
+
   try {
     await fetch(WEBHOOK_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ body: data })
+      body: JSON.stringify({ body: data, edit_token: editToken, is_edit: isEditMode })
     });
   } catch(e) {
-    console.warn('Webhook error (non-critical):', e);
+    console.warn('Webhook error:', e);
   }
+
+  hideLoading();
 
   document.getElementById('form-screen').style.display = 'none';
   const rs = document.getElementById('result-screen');
   rs.style.display = 'block';
 
+  if (isEditMode) {
+    document.getElementById('result-title').textContent = 'Alterações salvas!';
+    document.getElementById('result-subtitle').textContent = 'Seu briefing foi atualizado com sucesso.';
+  }
+
+  // Edit link
+  const editLink = `${window.location.origin}${window.location.pathname}?edit=${editToken}`;
+  document.getElementById('edit-link-display').value = editLink;
+
   const briefing = buildBriefing();
   document.getElementById('briefing-output').textContent = briefing;
 
-  const msg = encodeURIComponent('Olá! Segue o briefing preenchido para o assistente virtual da clínica:\n\n' + briefing);
+  const msg = encodeURIComponent('Olá! Segue o briefing para o assistente virtual da clínica:\n\n' + briefing);
   document.getElementById('whatsapp-link').href = `https://wa.me/?text=${msg}`;
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -945,15 +1051,18 @@ function buildBriefing() {
   const d = data;
   const ticket_labels = { 'ate300':'Até R$ 300', '300a800':'R$ 300 a R$ 800', '800a2000':'R$ 800 a R$ 2.000', 'acima2000':'Acima de R$ 2.000' };
   const preco_labels = { 'sim':'Pode informar valores', 'faixa':'Apenas faixa de preço', 'nao':'Direcionar para avaliação' };
-  const objetivo_labels = { 'consulta_gratis':'Agendar avaliação gratuita', 'consulta_paga':'Agendar consulta paga', 'link':'Enviar para link de agendamento', 'humano':'Transferir para atendente humano' };
-  const origem_labels = { 'disparo':'Disparo em massa (prospecção)', 'anuncio':'Anúncio pago', 'organico':'Instagram / orgânico', 'indicacao':'Indicação' };
+  const objetivo_labels = { 'consulta_gratis':'Agendar avaliação gratuita', 'consulta_paga':'Agendar consulta paga', 'link':'Link de agendamento', 'humano':'Atendente humano' };
+  const origem_labels = { 'disparo':'Disparo em massa', 'anuncio':'Anúncio pago', 'organico':'Instagram / orgânico', 'indicacao':'Indicação' };
 
   return `════════════════════════════════════
 BRIEFING — ASSISTENTE VIRTUAL
 ════════════════════════════════════
 
-📋 RESPONSÁVEL
+👤 RESPONSÁVEL
 Nome: ${d.nome_responsavel || '—'}
+WhatsApp: ${d.whatsapp || '—'}
+E-mail: ${d.email || '—'}
+Cargo: ${d.cargo || '—'}
 
 🏥 A CLÍNICA
 Nome: ${d.nome_clinica || '—'}
@@ -974,8 +1083,8 @@ ${d.promocao ? `Promoção ativa: ${d.promocao}` : 'Sem promoção ativa'}
 📅 ATENDIMENTO & AGENDAMENTO
 ────────────────────────────────────
 Horários: ${d.horarios || '—'}
-Objetivo do assistente: ${objetivo_labels[d.objetivo] || '—'}
-${d.link_agendamento ? `Link de agendamento: ${d.link_agendamento}` : 'Sem link de agendamento'}
+Objetivo: ${objetivo_labels[d.objetivo] || '—'}
+${d.link_agendamento ? `Link: ${d.link_agendamento}` : 'Sem link de agendamento'}
 Processo: ${d.como_agendar || '—'}
 
 ────────────────────────────────────
@@ -987,7 +1096,7 @@ ${d.obj_preco || '—'}
 "Não tenho tempo":
 ${d.obj_tempo || '—'}
 
-"Tenho medo / insegurança":
+"Tenho medo":
 ${d.obj_medo || '—'}
 
 ────────────────────────────────────
@@ -995,10 +1104,20 @@ ${d.obj_medo || '—'}
 ────────────────────────────────────
 Paciente ideal: ${d.publico || '—'}
 Origem do lead: ${origem_labels[d.origem_lead] || '—'}
-O que NÃO fazer: ${d.nao_fazer || '—'}
-${d.info_extra ? `Informações extras: ${d.info_extra}` : ''}
+Não fazer: ${d.nao_fazer || '—'}
+${d.info_extra ? `Extras: ${d.info_extra}` : ''}
 
 ════════════════════════════════════`;
+}
+
+function copyEditLink() {
+  const input = document.getElementById('edit-link-display');
+  navigator.clipboard.writeText(input.value).then(() => {
+    const btn = document.getElementById('copy-link-btn');
+    btn.textContent = '✓ Copiado!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copiar'; btn.classList.remove('copied'); }, 2500);
+  });
 }
 
 function copyBriefing() {
@@ -1014,13 +1133,20 @@ function copyBriefing() {
 function restart() {
   current = 0;
   data = {};
+  editToken = null;
+  isEditMode = false;
   document.getElementById('result-screen').style.display = 'none';
   document.getElementById('form-screen').style.display = 'block';
+  document.getElementById('hero-badge').textContent = 'Briefing Inicial';
+  document.getElementById('edit-banner-wrap').innerHTML = '';
+  // Remove edit param from URL
+  window.history.replaceState({}, '', window.location.pathname);
   renderStep();
 }
 
 // Init
-renderStep();
+checkEditMode();
+if (!isEditMode) renderStep();
 </script>
 </body>
 </html>
